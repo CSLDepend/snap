@@ -383,7 +383,7 @@ public:
         virtual bool beginWrite(void* buffer, size_t length, size_t offset, size_t *bytesWritten);
 
         virtual bool waitForCompletion();
-    
+
     private:
         WindowsAsyncFile*   file;
         bool                writing;
@@ -391,7 +391,7 @@ public:
     };
 
     virtual AsyncFile::Writer* getWriter();
-    
+
     class Reader : public AsyncFile::Reader
     {
     public:
@@ -402,7 +402,7 @@ public:
         virtual bool beginRead(void* buffer, size_t length, size_t offset, size_t *bytesRead);
 
         virtual bool waitForCompletion();
-    
+
     private:
         WindowsAsyncFile*   file;
         bool                reading;
@@ -822,7 +822,7 @@ ReadLargeFile(
     void* buffer,
     size_t bytes)
 {
-    return fread(buffer, 1, bytes, file->file);    
+    return fread(buffer, 1, bytes, file->file);
 }
 
     void
@@ -851,7 +851,7 @@ OpenMemoryMappedFile(
     bool write,
     bool sequential)
 {
-    int fd = open(filename, write ? O_CREAT | O_RDWR : O_RDONLY);
+    int fd = open(filename, write ? O_CREAT | O_RDWR : O_RDONLY, S_IRWXU);
     if (fd < 0) {
         warn("OpenMemoryMappedFile %s failed", filename);
         return NULL;
@@ -909,7 +909,7 @@ public:
         virtual bool beginWrite(void* buffer, size_t length, size_t offset, size_t *bytesWritten);
 
         virtual bool waitForCompletion();
-    
+
     private:
         PosixAsyncFile*     file;
         bool                writing;
@@ -919,7 +919,7 @@ public:
     };
 
     virtual AsyncFile::Writer* getWriter();
-    
+
     class Reader : public AsyncFile::Reader
     {
     public:
@@ -930,7 +930,7 @@ public:
         virtual bool beginRead(void* buffer, size_t length, size_t offset, size_t *bytesRead);
 
         virtual bool waitForCompletion();
-    
+
     private:
         PosixAsyncFile*     file;
         bool                reading;
@@ -1144,7 +1144,7 @@ public:
         virtual bool beginWrite(void* buffer, size_t length, size_t offset, size_t *bytesWritten);
 
         virtual bool waitForCompletion();
-    
+
     private:
         OsxAsyncFile*       file;
         bool                writing;
@@ -1154,7 +1154,7 @@ public:
     };
 
     virtual AsyncFile::Writer* getWriter();
-    
+
     class Reader : public AsyncFile::Reader
     {
     public:
@@ -1165,7 +1165,7 @@ public:
         virtual bool beginRead(void* buffer, size_t length, size_t offset, size_t *bytesRead);
 
         virtual bool waitForCompletion();
-    
+
     private:
         OsxAsyncFile*       file;
         bool                reading;
